@@ -1,0 +1,425 @@
+{
+	"$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+	"version": 1,
+	"newProjectRoot": "projects",
+	"projects": {
+		"host": {
+			"projectType": "application",
+			"schematics": {},
+			"root": "projects/host",
+			"sourceRoot": "projects/host/src",
+			"prefix": "app",
+			"architect": {
+				"build": {
+					"builder": "ngx-build-plus:browser",
+					"options": {
+						"outputPath": "dist/host",
+						"index": "projects/host/src/index.html",
+						"polyfills": [
+							"zone.js"
+						],
+						"tsConfig": "projects/host/tsconfig.app.json",
+						"assets": [
+							{
+								"glob": "**/*",
+								"input": "projects/host/public",
+								"output": "."
+							}
+						],
+						"allowedCommonJsDependencies": [
+							"@angular-architects/module-federation"
+						],
+						"styles": [
+							"node_modules/bootstrap/dist/css/bootstrap.min.css",
+							"projects/host/src/styles.css"
+						],
+						"scripts": [
+							"node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+						],
+						"main": "projects/host/src/main.ts",
+						"extraWebpackConfig": "projects/host/webpack.config.js",
+						"commonChunk": false
+					},
+					"configurations": {
+						"production": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kB",
+									"maximumError": "1MB"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "4kB",
+									"maximumError": "8kB"
+								}
+							],
+							"outputHashing": "all",
+							"extraWebpackConfig": "projects/host/webpack.prod.config.js"
+						},
+						"development": {
+							"optimization": false,
+							"extractLicenses": false,
+							"sourceMap": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "ngx-build-plus:dev-server",
+					"configurations": {
+						"production": {
+							"buildTarget": "host:build:production",
+							"extraWebpackConfig": "projects/host/webpack.prod.config.js"
+						},
+						"development": {
+							"buildTarget": "host:build:development"
+						}
+					},
+					"defaultConfiguration": "development",
+					"options": {
+						"proxyConfig": "proxy.conf.json",
+						"port": 4200,
+						"publicHost": "http://localhost:4200",
+						"extraWebpackConfig": "projects/host/webpack.config.js"
+					}
+				},
+				"extract-i18n": {
+					"builder": "@angular-devkit/build-angular:extract-i18n"
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing"
+						],
+						"tsConfig": "projects/host/tsconfig.spec.json",
+						"assets": [
+							{
+								"glob": "**/*",
+								"input": "projects/host/public"
+							}
+						],
+						"styles": [
+							"projects/host/src/styles.css"
+						],
+						"scripts": []
+					}
+				}
+			}
+		},
+		"users": {
+			"projectType": "application",
+			"schematics": {},
+			"root": "projects/users",
+			"sourceRoot": "projects/users/src",
+			"prefix": "app",
+			"architect": {
+				"build": {
+					"builder": "ngx-build-plus:browser",
+					"options": {
+						"outputPath": "dist/users",
+						"index": "projects/users/src/index.html",
+						"polyfills": [
+							"zone.js"
+						],
+						"allowedCommonJsDependencies": [
+							"@angular-architects/module-federation"
+						],
+						"tsConfig": "projects/users/tsconfig.app.json",
+						"assets": [
+							{
+								"glob": "**/*",
+								"input": "projects/users/public",
+								"output": "."
+							}
+						],
+						"styles": [
+							"projects/users/src/styles.css"
+						],
+						"scripts": [],
+						"main": "projects/users/src/main.ts",
+						"extraWebpackConfig": "projects/users/webpack.config.js",
+						"commonChunk": false
+					},
+					"configurations": {
+						"production": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kB",
+									"maximumError": "1MB"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "4kB",
+									"maximumError": "8kB"
+								}
+							],
+							"outputHashing": "all",
+							"extraWebpackConfig": "projects/users/webpack.prod.config.js"
+						},
+						"development": {
+							"optimization": false,
+							"extractLicenses": false,
+							"sourceMap": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "ngx-build-plus:dev-server",
+					"configurations": {
+						"production": {
+							"buildTarget": "users:build:production",
+							"extraWebpackConfig": "projects/users/webpack.prod.config.js"
+						},
+						"development": {
+							"buildTarget": "users:build:development"
+						}
+					},
+					"defaultConfiguration": "development",
+					"options": {
+						"proxyConfig": "proxy.conf.json",
+						"port": 4201,
+						"publicHost": "http://localhost:4201",
+						"extraWebpackConfig": "projects/users/webpack.config.js"
+					}
+				},
+				"extract-i18n": {
+					"builder": "@angular-devkit/build-angular:extract-i18n"
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing"
+						],
+						"tsConfig": "projects/users/tsconfig.spec.json",
+						"assets": [
+							{
+								"glob": "**/*",
+								"input": "projects/users/public"
+							}
+						],
+						"styles": [
+							"projects/users/src/styles.css"
+						],
+						"scripts": []
+					}
+				}
+			}
+		},
+		"usuarioDetail": {
+			"projectType": "application",
+			"schematics": {},
+			"root": "projects/usuario-detail",
+			"sourceRoot": "projects/usuario-detail/src",
+			"prefix": "app",
+			"architect": {
+				"build": {
+					"builder": "ngx-build-plus:browser",
+					"options": {
+						"outputPath": "dist/usuario-detail",
+						"index": "projects/usuario-detail/src/index.html",
+						"polyfills": [
+							"zone.js"
+						],
+						"tsConfig": "projects/usuario-detail/tsconfig.app.json",
+						"assets": [
+							{
+								"glob": "**/*",
+								"input": "projects/usuario-detail/public",
+								"output": "."
+							}
+						],
+						"styles": [
+							"projects/usuario-detail/src/styles.css"
+						],
+						"scripts": [],
+						"main": "projects/usuario-detail/src/main.ts",
+						"extraWebpackConfig": "projects/usuario-detail/webpack.config.js",
+						"commonChunk": false
+					},
+					"configurations": {
+						"production": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kB",
+									"maximumError": "1MB"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "4kB",
+									"maximumError": "8kB"
+								}
+							],
+							"outputHashing": "all",
+							"extraWebpackConfig": "projects/usuario-detail/webpack.prod.config.js"
+						},
+						"development": {
+							"optimization": false,
+							"extractLicenses": false,
+							"sourceMap": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "ngx-build-plus:dev-server",
+					"configurations": {
+						"production": {
+							"buildTarget": "usuarioDetail:build:production",
+							"extraWebpackConfig": "projects/usuario-detail/webpack.prod.config.js"
+						},
+						"development": {
+							"buildTarget": "usuarioDetail:build:development"
+						}
+					},
+					"defaultConfiguration": "development",
+					"options": {
+						"proxyConfig": "proxy.conf.json",
+						"port": 4202,
+						"publicHost": "http://localhost:4202",
+						"extraWebpackConfig": "projects/usuario-detail/webpack.config.js"
+					}
+				},
+				"extract-i18n": {
+					"builder": "@angular-devkit/build-angular:extract-i18n"
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing"
+						],
+						"tsConfig": "projects/usuario-detail/tsconfig.spec.json",
+						"assets": [
+							{
+								"glob": "**/*",
+								"input": "projects/usuario-detail/public"
+							}
+						],
+						"styles": [
+							"projects/usuario-detail/src/styles.css"
+						],
+						"scripts": []
+					}
+				}
+			}
+		},
+		"followers": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:component": {
+					"style": "scss"
+				}
+			},
+			"root": "projects/followers",
+			"sourceRoot": "projects/followers/src",
+			"prefix": "app",
+			"architect": {
+				"build": {
+					"builder": "ngx-build-plus:browser",
+					"options": {
+						"outputPath": "dist/followers",
+						"index": "projects/followers/src/index.html",
+						"polyfills": [
+							"zone.js"
+						],
+						"tsConfig": "projects/followers/tsconfig.app.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							{
+								"glob": "**/*",
+								"input": "projects/followers/public",
+								"output": "."
+							}
+						],
+						"styles": [
+							"projects/followers/src/styles.scss"
+						],
+						"scripts": [],
+						"main": "projects/followers/src/main.ts",
+						"extraWebpackConfig": "projects/followers/webpack.config.js",
+						"commonChunk": false
+					},
+					"configurations": {
+						"production": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kB",
+									"maximumError": "1MB"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "4kB",
+									"maximumError": "8kB"
+								}
+							],
+							"outputHashing": "all",
+							"extraWebpackConfig": "projects/followers/webpack.prod.config.js"
+						},
+						"development": {
+							"optimization": false,
+							"extractLicenses": false,
+							"sourceMap": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "ngx-build-plus:dev-server",
+					"configurations": {
+						"production": {
+							"buildTarget": "followers:build:production",
+							"extraWebpackConfig": "projects/followers/webpack.prod.config.js"
+						},
+						"development": {
+							"buildTarget": "followers:build:development"
+						}
+					},
+					"defaultConfiguration": "development",
+					"options": {
+            "proxyConfig": "proxy.conf.json",
+						"port": 4203,
+						"publicHost": "http://localhost:4203",
+						"extraWebpackConfig": "projects/followers/webpack.config.js"
+					}
+				},
+				"extract-i18n": {
+					"builder": "@angular-devkit/build-angular:extract-i18n"
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing"
+						],
+						"tsConfig": "projects/followers/tsconfig.spec.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							{
+								"glob": "**/*",
+								"input": "projects/followers/public"
+							}
+						],
+						"styles": [
+							"projects/followers/src/styles.scss"
+						],
+						"scripts": []
+					}
+				}
+			}
+		}
+	},
+	"cli": {
+		"analytics": false
+	}
+}
