@@ -48,7 +48,9 @@ export class usuariosDetailComponent implements OnInit {
   }
 
   navigateToFollowers(login: string) {
-    this.router.navigate(['/followers', login]);
+    if(this.usuarioDetail.followers !== 0) {
+      this.router.navigate(['/followers', login]);
+    }
   }
 
 
